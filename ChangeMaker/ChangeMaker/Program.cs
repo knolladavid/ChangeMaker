@@ -11,16 +11,62 @@ namespace ChangeMaker
         static void Main(string[] args)
         {
             //calling the function with $4.19.  
-            //Notice that when using the decimal format you must end numbers with an 'm'
+            //when using the decimal format you must end numbers with an 'm'
             ChangeAmount(4.19m);
+            ChangeAmount(3.18m);
+            ChangeAmount(0.99m);
+            ChangeAmount(12.93m);
+            ChangeAmount(222.22m);
+            
+            Console.ReadKey();
         }
 
-        public static Change ChangeAmount(decimal amount) 
+
+        ///function will take any dollar amount and make change with quarters, dimes, nickels, and pennies in the most effecient way 
+        /// <param name="chaChing">amount that you want split up into change</param>
+        /// <returns></returns>
+        public static Change ChangeAmount(decimal chaChing)
         {
-            //this is our object that will hold the data of how many coins of each type to return
+            //when change is made how much of new coins will be returned "new"
             Change amountAsChange = new Change();
-           
+
+            
+            Console.WriteLine("Amount: {0}", chaChing);
+
+
+            //keeps looping through until the number reaches zero
+            while (chaChing > 0)
+            {
+                //if the amount is higher then 25 cents  it will keep subtracting 25 cents until its below that number
+                if (chaChing >= 0.25m)
+                {
+                    chaChing -= 0.25m;
+                    amountAsChange.Quarters++;
+                }
+                //if number is above 10 cents, but below 25 cents it will subtract ten cents 
+                else if (chaChing >= 0.10m)
+                {
+                    chaChing -= 0.10m;
+                    amountAsChange.Dimes++;
+                }
+                else if (chaChing >= 0.05m)
+                {
+                    chaChing -= 0.05m;
+                    amountAsChange.Nickles++;
+                }
+                else
+                {
+                    chaChing -= 0.01m;
+                    amountAsChange.Pennies++;
+                }
+            }
             //TODO: Fill in the the code to make this function work
+
+            Console.WriteLine("Quarters: {0}", amountAsChange.Quarters);
+            Console.WriteLine("Dimes: {0}", amountAsChange.Dimes);
+            Console.WriteLine("Nickles: {0}", amountAsChange.Nickles);
+            Console.WriteLine("Pennies: {0}", amountAsChange.Pennies);
+            Console.WriteLine("\n");
 
             //return our Change Object
             return amountAsChange;
@@ -52,30 +98,45 @@ namespace ChangeMaker
     public class Change
     {
         /// <summary>
-        /// This is property to hold the number of Quarters to be returned as change
+        ///  property to hold the number of Quarters to be returned as change
         /// </summary>
         public int Quarters { get; set; }
 
         /// <summary>
-        /// This is property to hold the number of Dimes to be returned as change
+        ///  property to hold the number of Dimes to be returned as change
         /// </summary>
         public int Dimes { get; set; }
 
         /// <summary>
-        /// This is property to hold the number of Nickles to be returned as change
+        ///  property to hold the number of Nickles to be returned as change
         /// </summary>
         public int Nickles { get; set; }
 
         /// <summary>
-        /// This is property to hold the number of Pennies to be returned as change
+        /// property to hold the number of Pennies to be returned as change
         /// </summary>public int Nickles { get; set; }
         public int Pennies { get; set; }
 
+        //public int hundreds { get; set; }
+        //public int fiddies { get; set; }
+        //public int twenties { get; set; }
+        //public int tens { get; set; }
+        //public int fivers { get; set; }
+        //public int ones { get; set; }
         /// <summary>
-        /// This is a constructor, it initializes a new instance of the class (called an object).  This sets it's default values.
+        
         /// </summary>
         public Change()
         {
+            //this.hundreds = 0;
+            //this.fiddies = 0;
+            //this.twenties = 0;
+            //this.tens = 0;
+            //this.fivers = 0;
+            //this.ones = 0;
+            
+            
+            
             this.Quarters = 0;
             this.Dimes = 0;
             this.Nickles = 0;
